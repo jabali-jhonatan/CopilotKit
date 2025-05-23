@@ -503,7 +503,7 @@ def copilotkit_messages_to_crewai_flow(messages: List[Message]) -> List[Any]:
             for msg in messages:
                 msg_id = msg["id"]
                 if (msg.get("parentMessageId", None) == original_message_id or
-                    msg_id == original_message_id):
+                    msg_id == original_message_id) and msg.get("type") == "ActionExecutionMessage":
                     all_tool_calls.append(msg)
 
             tool_calls = [
